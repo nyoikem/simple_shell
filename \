@@ -8,8 +8,8 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "defs.h"
-#include "cons.h"
+#include "typedefs.h"
+#include "constants.h"
 
 /* signals and processes */
 void signal_handler(int);
