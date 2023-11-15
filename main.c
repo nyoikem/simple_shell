@@ -1,28 +1,25 @@
 #include "shell.h"
 
-
 /**
- * main - entry point
- *
- * @argc: number of arguments given to the program
- * @argv: arguments list
- *
- * Return: returns the value of the last executed command
+ * main - Entry Point to Shell
+ * Return: Always 0 on success
  */
-int main(int argc, char **argv)
+int main(void)
 {
-	char *cmdline = NULL;
-	char **cmdargs;
-	char prompt[] = "(hsh) ";
-	Bool status = true;
+	char *buffer, *line;
+	list_t *env_head;
+	int ret_val;
 
-	rename = (argv[0] != NULL) ? argv[0] : NULL;
+	/* create a buffer to store input */
+	buffer = malloc(sizeof(char) * BUFF_SIZE);
+	if (buffer == NULL)
+		return (1);
+	line = NULL;
+	env_head = array_to_list(environ);
+	/* call cmd_line_loop */
+	ret_val = cmd_line_loop(buffer, line, &env_head);
 
-	while (status)
-	{
-		write(1, prompt, strlen(prompt));
-		cmdline = get_user_input();
-	}
-
-	return (0);
+	free_list(env_head);
+	free(buffer);
+	return (ret_val);
 }
